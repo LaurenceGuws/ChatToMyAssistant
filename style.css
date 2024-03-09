@@ -274,6 +274,6 @@ body {
 /* Basic Responsive Adjustments */
 @media (max-width: 800px) {
     #inputArea {
-        margin-bottom: 10%;
+        margin-bottom: 20%;
     }
 }
