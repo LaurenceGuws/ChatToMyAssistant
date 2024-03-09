@@ -156,7 +156,7 @@ h1 {
 
 /* Focus within Container */
 #inputContainer:focus-within {
-    border-color: #5aa9ff;
+    border-color: #004F8B;
     /* Darker border when input is focused */
     box-shadow: 0 0 5px #83a4ff;
     /* Subtle glow effect around the container */
@@ -165,7 +165,7 @@ h1 {
 
 /* Send Button Styling */
 #send {
-    background-color: #007BFF;
+    background-color: #004F8B;
     color: #FFFFFF;
     padding: 10px 20px;
     border: none;
@@ -213,7 +213,7 @@ h1 {
     top: 50%;
     transform: translateY(-50%) rotate(90deg);
     /* Rotate the button */
-    background-color: #007BFF;
+    background-color: #004F8B;
     border: none;
     color: white;
     padding: 10px 20px;
