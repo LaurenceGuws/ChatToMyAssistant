@@ -272,53 +272,8 @@ body {
 }
 
 /* Basic Responsive Adjustments */
-@media (max-width: 600px) {
-    #chatContainer {
-        max-width: 100%; /* Utilize the full width on smaller screens */
+@media (max-width: 800px) {
+    #inputArea {
+        margin-bottom: 10%;
     }
-
-    #togglePanelBtn {
-        left: 0; /* Adjust the toggle button position for easy access */
-        transform: translateY(-50%) rotate(0deg); /* No rotation needed */
-    }
-
-    #togglePanelBtn.open {
-        left: 200px; /* Adjust to match the responsive width of the side panel */
-    }
-
-    #sidePanel {
-        width: 200px; /* Slightly reduce the width for small screens */
-        left: -200px; /* Match the adjusted width */
-    }
-
-    .message {
-        max-width: 75%; /* Increase maximum message width for better readability */
-    }
-
-    #userInput {
-        padding: 8px 16px; /* Slightly reduce padding to save space */
-    }
-
-    #send {
-        padding: 8px 16px; /* Adjust button padding accordingly */
-    }
-}
-
-/* Considerations for Virtual Keyboards and Navigation Bars */
-@media (max-height: 500px) {
-    body {
-        height: auto; /* Allow body to expand vertically */
-        min-height: 100vh; /* Ensure it's never smaller than the viewport */
-    }
-
-    #chatContainer {
-        height: auto; /* Allow chat container to expand */
-        min-height: 100vh; /* Ensure it covers the viewport height */
-    }
-}
-
-/* Adjust Input Area for Virtual Keyboard Display */
-/* This part requires JavaScript to dynamically add a class to body or another container when the keyboard is active */
-.keyboard-active #chatContainer {
-    padding-bottom: 20vh; /* Reserve space at the bottom, adjust based on actual keyboard height */
 }
