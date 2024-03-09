@@ -36,6 +36,19 @@ body {
     overflow: hidden;
 }
 
+h1 {
+    font-family: 'Roboto', sans-serif; /* Maintain consistency with the body font */
+    color: #004F8B; /* A color that matches the user message bubbles for cohesion */
+    text-align: center; /* Center the title for emphasis */
+    font-size: 28px; /* A size that's prominent but not overwhelming */
+    font-weight: normal; /* Avoid making it too bold to keep it sleek */
+    margin-top: 20px; /* Add some space at the top */
+    margin-bottom: 20px; /* And also at the bottom before the content starts */
+    text-transform: uppercase; /* OPTIONAL: Makes it stand out more */
+    letter-spacing: 1.5px; /* OPTIONAL: Increases readability of uppercase letters */
+}
+
+
 #chatContainer {
     width: 100%;
     max-width: 1000px;
