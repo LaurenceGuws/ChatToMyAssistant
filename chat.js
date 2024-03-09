@@ -54,7 +54,7 @@ function sendMessage() {
   // Function to decode Base64 encoded API Key
   const decodeApiKey = (base64Str) => atob(base64Str);
   const apiKey = decodeApiKey(base64ApiKey);
-  
+  console.log("calling model: ", data.model);
   fetch('https://api.openai.com/v1/chat/completions', {
     method: 'POST',
     headers: {
