@@ -1,0 +1,272 @@
+/* Animations for message bubbles entering the chat */
+@keyframes slideInFromRight {
+    from {
+        opacity: 0;
+        transform: translateX(50%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInFromLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    /* Updated font */
+    margin: 0;
+    padding: 0;
+    background-color: #F4F7FA;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#chatContainer {
+    width: 100%;
+    max-width: 1000px;
+    /* Max width for larger screens */
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: margin-left 0.5s ease-in-out;
+}
+
+#chatbox {
+    flex-grow: 1;
+    background-color: #F4F7FA;
+    overflow-y: auto;
+    padding: 20px;
+    /* Good amount of padding around messages */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    /* Increase space between messages */
+}
+
+.message {
+    padding: 12px 20px;
+    /* Slightly more padding inside message bubbles */
+    border-radius: 18px;
+    margin-bottom: 10px;
+    /* Consistent margin for all messages */
+    display: inline-block;
+    max-width: 80%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* Adding shadow for depth */
+}
+
+.userMessage,
+.botMessage {
+    position: relative;
+    /* For tail positioning */
+}
+
+.userMessage {
+    background-color: #004F8B;
+    color: #FFFFFF;
+    align-self: flex-end;
+    /* Aligns user messages to the right */
+    animation: slideInFromRight 0.5s ease-out both;
+}
+
+.botMessage {
+    background-color: #cfcfcf;
+    color: #000000;
+    align-self: flex-start;
+    /* Aligns bot messages to the left */
+    animation: slideInFromLeft 0.5s ease-out both;
+}
+
+#inputArea {
+    padding: 20px;
+    /* Padding around the input area */
+    background-color: #f7f7f8;
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #ddd;
+    /* Separates input area from chat */
+}
+
+/* Input Field Styling */
+/* Container Styling */
+#inputContainer {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    border-radius: 25px;
+    /* Rounded edges for a modern look */
+    border: 2px solid #ddd;
+    /* Solid border for the container */
+    background-color: #f7f7f8;
+    /* Slightly off-white background */
+    margin-right: 20px;
+    /* Ensure some space on the right if needed */
+    transition: border-color 0.3s ease-in-out;
+    /* Smooth transition for focus within */
+    width: 100%;
+}
+
+/* Input Field Styling */
+#userInput {
+    max-height: 50dvh;
+    flex-grow: 1;
+    padding: 10px 20px;
+    border-radius: 23px;
+    /* Slightly less than container to fit nicely */
+    border: none;
+    /* Removing individual border */
+    outline: none;
+    background-color: #f7f7f8;
+    /* Matching the container's background */
+    font-size: 16px;
+    /* Slightly larger font for better readability */
+    margin-right: 10px;
+    /* Reduced space to button, adjusted as per design */
+    resize: none;
+    /* Disables the resize handle */
+}
+
+/* Focus within Container */
+#inputContainer:focus-within {
+    border-color: #5aa9ff;
+    /* Darker border when input is focused */
+    box-shadow: 0 0 5px #83a4ff;
+    /* Subtle glow effect around the container */
+}
+
+
+/* Send Button Styling */
+#send {
+    background-color: #007BFF;
+    color: #FFFFFF;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 23px;
+    /* Rounded edges to seamlessly integrate with the input field */
+    cursor: pointer;
+    outline: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease-in-out;
+    /* Smooth transition for color */
+    box-shadow: none;
+    /* Opting for a flat design, no shadow by default */
+}
+
+#send:hover {
+    background-color: #0056b3;
+    /* Slightly darker on hover for feedback */
+}
+
+#send:active {
+    background-color: #004a9f;
+    /* Even darker on active/click */
+}
+
+/* Side Panel Animation */
+#sidePanel {
+    background-color: #f4f4f4;
+    width: 250px;
+    position: fixed;
+    left: -250px;
+    /* Start off the screen */
+    top: 0;
+    bottom: 0;
+    transition: left 0.5s ease-in-out;
+    /* Smooth transition for the side panel */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    /* Shadow for depth */
+}
+
+/* Toggle Panel Button Interactive Styles */
+#togglePanelBtn {
+    position: fixed;
+    left: 10px;
+    /* Adjust the value as needed for spacing */
+    top: 50%;
+    transform: translateY(-50%) rotate(90deg);
+    /* Rotate the button */
+    background-color: #007BFF;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, left 0.5s ease-in-out;
+    border-radius: 20px;
+    /* Adjust the value as needed for pill shape */
+}
+
+
+
+#togglePanelBtn:hover,
+#togglePanelBtn:focus {
+    background-color: #0056b3;
+    /* Darker blue on hover/focus */
+    outline: none;
+    /* Removes the outline on focus for aesthetics */
+}
+
+#togglePanelBtn:active {
+    background-color: #004a9f;
+    /* Even darker blue to indicate active state */
+}
+
+#togglePanelBtn.open {
+    background-color: #0056b3;
+    /* Ensures the button remains the hover color when the panel is open */
+    left: 250px;
+    /* Adjust based on the width of the side panel */
+}
+
+/* General Styling for Custom Scrollbars */
+::-webkit-scrollbar {
+    width: 10px; /* Scrollbar width */
+    height: 10px; /* Scrollbar height, applied to horizontal bars */
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Track color */
+    border-radius: 10px; /* Match scrollbar border-radius */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888; /* Scrollbar handle color */
+    border-radius: 10px; /* Smooth rounded corners for the handle */
+    border: 2px solid #f1f1f1; /* Optional: Matching track color to create padding effect around handle */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Handle color on hover */
+}
+
+/* Scrollbar and Overflow Adjustments for Specific Elements */
+#chatContainer {
+    overflow-y: auto; /* Enable vertical scrolling */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+#userInput {
+    overflow-y: auto; /* Enable vertical scrolling for text input if content overflows */
+    overflow-x: hidden; /* Prevent horizontal scrolling in text input */
+    scrollbar-width: thin; /* For Firefox: Makes scrollbar 'thin' */
+    scrollbar-color: #888 #f1f1f1; /* For Firefox: Scrollbar handle and track color */
+}
+
+/* Prevent Horizontal Scrolling on the Body (Global) */
+body {
+    overflow-x: hidden; /* Prevent global horizontal scrolling */
+}
