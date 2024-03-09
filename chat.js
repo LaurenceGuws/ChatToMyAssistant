@@ -54,6 +54,7 @@ function sendMessage() {
     method: 'POST',
     headers: {
       'accept': 'application/json',
+      // Don't worry, API key is highly limited and safe to use here.
       'Authorization': 'Bearer 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', // Replace with your actual API key
       'Content-Type': 'application/json'
     },
