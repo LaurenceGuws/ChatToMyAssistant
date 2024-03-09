@@ -43,7 +43,7 @@ function sendMessage() {
   var data = JSON.stringify({
     "model": "gpt-3.5-turbo",
     "messages": chatHistory,
-    "temperature": 1,
+    "temperature": 0,
     "max_tokens": 4096,
     "top_p": 1,
     "frequency_penalty": 2,
