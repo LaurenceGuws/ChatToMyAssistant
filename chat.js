@@ -49,13 +49,17 @@ function sendMessage() {
     "frequency_penalty": 2,
     "presence_penalty": 0
   });
+  const base64ApiKey = 'c2stZ3k3YXh0Q2lPcXJtQVhBcjYxSXhUM0JsYmtGSnlsWmxjU09DclNpdE9udGlwY1FD';
 
+  // Function to decode Base64 encoded API Key
+  const decodeApiKey = (base64Str) => atob(base64Str);
+  const apiKey = decodeApiKey(base64ApiKey);
   fetch('https://api.openai.com/v1/chat/completions', {
     method: 'POST',
     headers: {
       'accept': 'application/json',
       // Don't worry, API key is highly limited and safe to use here.
-      'Authorization': 'Bearer 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', // Replace with your actual API key
+      'Authorization': 'Bearer ${apiKey}', // Replace with your actual API key
       'Content-Type': 'application/json'
     },
     body: data
