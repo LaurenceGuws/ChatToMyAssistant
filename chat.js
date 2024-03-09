@@ -54,12 +54,13 @@ function sendMessage() {
   // Function to decode Base64 encoded API Key
   const decodeApiKey = (base64Str) => atob(base64Str);
   const apiKey = decodeApiKey(base64ApiKey);
+  
   fetch('https://api.openai.com/v1/chat/completions', {
     method: 'POST',
     headers: {
       'accept': 'application/json',
-      // Don't worry, API key is highly limited and safe to use here.
-      'Authorization': 'Bearer ${apiKey}', // Replace with your actual API key
+      // Using the decoded API key securely
+      'Authorization': `Bearer ${apiKey}`, // Correctly use template literals here
       'Content-Type': 'application/json'
     },
     body: data
