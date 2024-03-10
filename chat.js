@@ -3,7 +3,11 @@ var userInputField = document.getElementById('userInput');
 var chatbox = document.getElementById('chatbox');
 // Rather fetch this from history.json in the same
 var chatHistory; // Declare chatHistory without initializing
-
+console.log(document.referrer);
+if (document.referrer === "http://127.0.0.1:5500/") {
+    // Display a popup message
+    alert("Email sent successfully.");
+  }
 // Immediately fetch the chat history from history.json and store it in chatHistory
 (async function fetchChatHistory() {
   try {
@@ -151,4 +155,13 @@ userInput.addEventListener('keyup', function (e) {
     e.preventDefault();
     // Trigger send message logic here
   }
+});
+
+// Snippet to append at the bottom of your existing script
+document.getElementById('solarsystemBtn').addEventListener('click', function() {
+  window.location.href = 'SOLARSYSTEM/index.html';
+});
+
+document.getElementById('sendEmailBtn').addEventListener('click', function() {
+  window.location.href = 'emailForm/index.html';
 });

@@ -1,0 +1,10 @@
+body, html {
+    margin: 0;
+    overflow: hidden;
+    height: 100%;
+}
+
+canvas {
+    display: block; /* Removes margin in the bottom */
+    background: #7c7c7c; /* Optional: in case the canvas is transparent */
+}
