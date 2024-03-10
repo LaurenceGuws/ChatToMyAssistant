@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        #loginContainer {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: 20px auto;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        #loginForm {
+            display: flex;
+            flex-direction: column;
+        }
+
+        #loginForm input {
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        #loginForm button {
+            background-color: #004F8B;
+            color: #ffffff;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        #loginForm button:hover {
+            background-color: #0056b3;
+        }
+
+        #providerOptions {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        #providerOptions h2 {
+            font-size: 16px;
+            font-weight: normal;
+            margin-bottom: 10px;
+        }
+
+        #providerOptions button {
+            background-color: #ffffff;
+            color: #004F8B;
+            padding: 10px 15px;
+            border: 1px solid #004F8B;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        #providerOptions button:hover {
+            background-color: #004F8B;
+            color: #ffffff;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loginContainer">
+        <h1>Login</h1>
+        <form id="loginForm">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Login</button>
+            <button id="registerBtn">Register</button>
+        </form>
+
+        <div id="providerOptions">
+            <h2>Or login with:</h2>
+            <button id="googleBtn">Google</button>
+            <button id="facebookBtn">Facebook</button>
+            <button id="twitterBtn">Twitter</button>
+            <button id="linkedinBtn">Linkedin</button>
+            <button id="githubBtn">Github</button>
+            <!-- Add more provider buttons as needed -->
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/oidc-client@1.11.5/dist/oidc-client.min.js"></script>
+    <script>
+        class AuthManager {
+            constructor(identityProviders) {
+                this.identityProviders = identityProviders;
+            }
+    
+            login(providerKey) {
+                const providerConfig = this.identityProviders[providerKey];
+                if (!providerConfig) {
+                    console.error(`Provider ${providerKey} is not configured.`);
+                    return;
+                }
+                // Initialize userManager with the provider's configuration every time login is called
+                const userManager = new Oidc.UserManager(providerConfig);
+                userManager.signinRedirect().catch(error => {
+                    console.error('Login error:', error);
+                });
+    
+                // Handle the authentication response
+                userManager.signinRedirectCallback().then(user => {
+                    this.handleUser(user);
+                }).catch(error => {
+                    console.error('Authentication error:', error);
+                });
+            }
+    
+            handleUser(user) {
+                const { profile } = user;
+                console.log('First Name:', profile.given_name);
+                console.log('Last Name:', profile.family_name);
+                console.log('Email:', profile.email);
+                console.log('Profile Photo:', profile.picture);
+                // Redirect or handle the user login success scenario
+                window.location.href = '/app';
+            }
+        }
+    
+        const identityProviders = {
+            google: {
+                authority: 'https://accounts.google.com',
+                client_id: '144886055593-49epqev8f4ehgrjpcjbtk3pinh26enpq.apps.googleusercontent.com',
+                client_secret: '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',
+                redirect_uri: 'http://127.0.0.1:5500/index.html',
+                response_type: 'code',
+                scope: 'openid profile email',
+                post_logout_redirect_uri: 'http://localhost:3000/logout'
+            },
+            github: {
+                authority: 'https://github.com/login/oauth',
+                client_id: 'Iv1.81ef1c17fe9c8279',
+                redirect_uri: 'http://127.0.0.1:5500/index.html',
+                response_type: 'code',
+                scope: 'user:email',
+                post_logout_redirect_uri: 'http://localhost:3000/logout'
+            },
+            linkedin: {
+                authority: 'https://www.linkedin.com/oauth/v2',
+                client_id: 'YOUR_LINKEDIN_CLIENT_ID',
+                redirect_uri: 'http://localhost:3000/callback',
+                response_type: 'code',
+                scope: 'r_liteprofile r_emailaddress',
+                post_logout_redirect_uri: 'http://localhost:3000/logout'
+            },
+            facebook: {
+                authority: 'https://www.facebook.com/v15.0/dialog/oauth',
+                client_id: 'YOUR_FACEBOOK_CLIENT_ID',
+                redirect_uri: 'http://localhost:3000/callback',
+                response_type: 'code',
+                scope: 'email',
+                post_logout_redirect_uri: 'http://localhost:3000/logout'
+            },
+            twitter: {
+                authority: 'https://twitter.com/oauth',
+                client_id: 'YOUR_TWITTER_CLIENT_ID',
+                redirect_uri: 'http://localhost:3000/callback',
+                response_type: 'code',
+                scope: '',
+                post_logout_redirect_uri: 'http://localhost:3000/logout'
+            }
+        };
+    
+        const authManager = new AuthManager(identityProviders);
+    
+        document.querySelectorAll('[id$="Btn"]').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const providerKey = this.id.replace('Btn', '').toLowerCase(); // Ensure the key matches your config keys
+                authManager.login(providerKey);
+            });
+        });
+    </script>
+    
+</body>
+
+</html>

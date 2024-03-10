@@ -165,3 +165,7 @@ document.getElementById('solarsystemBtn').addEventListener('click', function() {
 document.getElementById('sendEmailBtn').addEventListener('click', function() {
   window.location.href = 'emailForm/index.html';
 });
+
+document.getElementById('loginBtn').addEventListener('click', function() {
+  window.location.href = 'login/index.html';
+});
